@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -14,7 +13,6 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Vegetables = () => {
-  // Explicitly type these empty arrays to fix the TypeScript error
   const emptyDifficulties: Difficulty[] = [];
   const emptySeasons: Season[] = [];
   
@@ -22,6 +20,7 @@ const Vegetables = () => {
     difficulty: emptyDifficulties,
     seasons: emptySeasons,
   });
+
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const vegetables = getVegetablesList();
   
@@ -49,17 +48,15 @@ const Vegetables = () => {
           if (currentFilters.includes(value)) {
             return {
               ...prev,
-              seasons: currentFilters.filter(v => v !== value)
+              seasons: currentFilters.filter((v): v is Season => isValidSeason(v))
             };
           } else {
-            const newSeasons: Season[] = [...currentFilters, value];
             return {
               ...prev,
-              seasons: newSeasons
+              seasons: [...currentFilters, value]
             };
           }
         }
-        
         return prev;
       }
     });
