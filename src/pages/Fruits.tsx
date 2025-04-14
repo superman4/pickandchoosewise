@@ -8,11 +8,10 @@ import { Label } from "@/components/ui/label";
 import ProduceCard from "@/components/common/ProduceCard";
 import { getFruitsList } from "@/utils/produceData";
 import { Season } from "@/utils/seasonalData";
-
-type Difficulty = 'easy' | 'medium' | 'hard';
+import ProduceFilters, { FilterState, Difficulty } from "@/components/filters/ProduceFilters";
 
 const Fruits = () => {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<FilterState>({
     difficulty: [] as Difficulty[],
     seasons: [] as Season[],
   });
@@ -39,54 +38,45 @@ const Fruits = () => {
     return difficultyMatch && seasonMatch;
   });
   
-  const toggleDifficultyFilter = (value: Difficulty) => {
-    setFilters(prev => {
-      const currentFilters = [...prev.difficulty];
-      if (currentFilters.includes(value)) {
-        return {
-          ...prev,
-          difficulty: currentFilters.filter(v => v !== value)
-        };
-      } else {
-        return {
-          ...prev,
-          difficulty: [...currentFilters, value]
-        };
-      }
-    });
-  };
-  
-  const toggleSeasonFilter = (value: Season) => {
-    setFilters(prev => {
-      const currentFilters = [...prev.seasons];
-      if (currentFilters.includes(value)) {
-        return {
-          ...prev,
-          seasons: currentFilters.filter(v => v !== value)
-        };
-      } else {
-        return {
-          ...prev,
-          seasons: [...currentFilters, value]
-        };
-      }
-    });
-  };
-  
   const toggleFilter = (type: 'difficulty' | 'seasons', value: string) => {
-    if (type === 'difficulty') {
-      toggleDifficultyFilter(value as Difficulty);
-    } else {
-      // Ensure value is a valid Season before updating the state
-      if (isValidSeason(value)) {
-        toggleSeasonFilter(value);
+    setFilters(prev => {
+      if (type === 'difficulty') {
+        const difficultyValue = value as Difficulty;
+        const currentFilters = [...prev.difficulty];
+        
+        if (currentFilters.includes(difficultyValue)) {
+          return {
+            ...prev,
+            difficulty: currentFilters.filter(v => v !== difficultyValue)
+          };
+        } else {
+          return {
+            ...prev,
+            difficulty: [...currentFilters, difficultyValue]
+          };
+        }
+      } else {
+        // For seasons
+        // Make sure value is a valid Season before updating
+        if (['winter', 'spring', 'summer', 'fall'].includes(value)) {
+          const seasonValue = value as Season;
+          const currentFilters = [...prev.seasons];
+          
+          if (currentFilters.includes(seasonValue)) {
+            return {
+              ...prev,
+              seasons: currentFilters.filter(v => v !== seasonValue)
+            };
+          } else {
+            return {
+              ...prev,
+              seasons: [...currentFilters, seasonValue]
+            };
+          }
+        }
+        return prev;
       }
-    }
-  };
-  
-  // Helper function to validate if a string is a valid Season
-  const isValidSeason = (value: string): value is Season => {
-    return ['winter', 'spring', 'summer', 'fall'].includes(value);
+    });
   };
   
   const clearFilters = () => {
@@ -96,17 +86,10 @@ const Fruits = () => {
     });
   };
   
-  const formatFilter = (filter: string) => {
-    return filter.charAt(0).toUpperCase() + filter.slice(1);
-  };
-
   // Count active filters
   const activeFiltersCount = 
     filters.difficulty.length +
     filters.seasons.length;
-  
-  // Define valid seasons array with proper typing
-  const validSeasons: Season[] = ['winter', 'spring', 'summer', 'fall'];
   
   return (
     <div className="min-h-screen bg-background">
@@ -131,59 +114,14 @@ const Fruits = () => {
         </header>
         
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters - Desktop */}
-          <div className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24 space-y-8">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="font-semibold text-lg">Filters</h2>
-                  {activeFiltersCount > 0 && (
-                    <Button variant="ghost" size="sm" onClick={clearFilters} className="h-8">
-                      Clear
-                    </Button>
-                  )}
-                </div>
-                
-                {/* Difficulty filter */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-medium mb-3">Difficulty</h3>
-                  <div className="space-y-2">
-                    {['easy', 'medium', 'hard'].map(difficulty => (
-                      <div key={difficulty} className="flex items-center space-x-2">
-                        <Checkbox 
-                          id={`difficulty-${difficulty}`} 
-                          checked={filters.difficulty.includes(difficulty as Difficulty)}
-                          onCheckedChange={() => toggleFilter('difficulty', difficulty)}
-                        />
-                        <Label htmlFor={`difficulty-${difficulty}`} className="text-sm">
-                          {formatFilter(difficulty)}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Season filter */}
-                <div>
-                  <h3 className="text-sm font-medium mb-3">Season</h3>
-                  <div className="space-y-2">
-                    {validSeasons.map(season => (
-                      <div key={season} className="flex items-center space-x-2">
-                        <Checkbox 
-                          id={`season-${season}`} 
-                          checked={filters.seasons.includes(season)}
-                          onCheckedChange={() => toggleFilter('seasons', season)}
-                        />
-                        <Label htmlFor={`season-${season}`} className="text-sm">
-                          {formatFilter(season)}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* ProduceFilters Component */}
+          <ProduceFilters 
+            filters={filters}
+            toggleFilter={toggleFilter}
+            clearFilters={clearFilters}
+            showMobileFilters={showMobileFilters}
+            setShowMobileFilters={setShowMobileFilters}
+          />
           
           {/* Main content */}
           <div className="flex-1">
@@ -242,77 +180,6 @@ const Fruits = () => {
           </div>
         </div>
       </div>
-      
-      {/* Mobile filters */}
-      {showMobileFilters && (
-        <div className="fixed inset-0 bg-background z-50 lg:hidden overflow-auto">
-          <div className="p-4 border-b">
-            <div className="flex items-center justify-between">
-              <h2 className="font-semibold text-lg">Filters</h2>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={() => setShowMobileFilters(false)}
-                className="h-8 w-8"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-          
-          <div className="p-4 space-y-8">
-            {/* Difficulty filter */}
-            <div>
-              <h3 className="text-sm font-medium mb-3">Difficulty</h3>
-              <div className="space-y-3">
-                {['easy', 'medium', 'hard'].map(difficulty => (
-                  <div key={difficulty} className="flex items-center space-x-2">
-                    <Checkbox 
-                      id={`mobile-difficulty-${difficulty}`} 
-                      checked={filters.difficulty.includes(difficulty as Difficulty)}
-                      onCheckedChange={() => toggleFilter('difficulty', difficulty)}
-                    />
-                    <Label htmlFor={`mobile-difficulty-${difficulty}`}>
-                      {formatFilter(difficulty)}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Season filter */}
-            <div>
-              <h3 className="text-sm font-medium mb-3">Season</h3>
-              <div className="space-y-3">
-                {validSeasons.map(season => (
-                  <div key={season} className="flex items-center space-x-2">
-                    <Checkbox 
-                      id={`mobile-season-${season}`} 
-                      checked={filters.seasons.includes(season)}
-                      onCheckedChange={() => toggleFilter('seasons', season)}
-                    />
-                    <Label htmlFor={`mobile-season-${season}`}>
-                      {formatFilter(season)}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Action buttons */}
-            <div className="flex gap-4 pt-4">
-              {activeFiltersCount > 0 && (
-                <Button variant="outline" onClick={clearFilters} className="flex-1">
-                  Clear All
-                </Button>
-              )}
-              <Button onClick={() => setShowMobileFilters(false)} className="flex-1">
-                Apply Filters
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
