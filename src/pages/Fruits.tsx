@@ -56,15 +56,16 @@ const Fruits = () => {
         }
       } else { // type === 'seasons'
         const currentFilters = [...prev.seasons];
-        if (currentFilters.includes(value as Season)) {
+        const seasonValue = value as Season;
+        if (currentFilters.includes(seasonValue)) {
           return {
             ...prev,
-            seasons: currentFilters.filter(v => v !== value)
+            seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
           return {
             ...prev,
-            seasons: [...currentFilters, value as Season]
+            seasons: [...currentFilters, seasonValue]
           };
         }
       }
