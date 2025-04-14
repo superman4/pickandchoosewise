@@ -54,17 +54,19 @@ const Vegetables = () => {
           };
         }
       } else { // type === 'seasons'
-        const currentFilters = [...prev.seasons];
         const seasonValue = value as Season;
+        const currentFilters = [...prev.seasons];
+        
         if (currentFilters.includes(seasonValue)) {
           return {
             ...prev,
             seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
+          const newSeasons: Season[] = [...currentFilters, seasonValue];
           return {
             ...prev,
-            seasons: [...currentFilters, seasonValue]
+            seasons: newSeasons
           };
         }
       }
