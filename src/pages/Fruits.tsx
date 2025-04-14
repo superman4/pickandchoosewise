@@ -12,7 +12,6 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Fruits = () => {
-  // Define empty arrays with proper types for reuse
   const emptyDifficulties: Difficulty[] = [];
   const emptySeasons: Season[] = [];
   
