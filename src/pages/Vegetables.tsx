@@ -70,8 +70,8 @@ const Vegetables = () => {
               seasons: currentFilters.filter(v => v !== seasonValue)
             };
           } else {
-            // Create a strongly typed new array - TypeScript now knows this array contains only valid Season values
-            const newSeasons = [...currentFilters, seasonValue];
+            // Explicitly type the new array as Season[]
+            const newSeasons: Season[] = [...currentFilters, seasonValue];
             return {
               ...prev,
               seasons: newSeasons
