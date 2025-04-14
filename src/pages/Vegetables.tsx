@@ -84,9 +84,11 @@ const Vegetables = () => {
   };
   
   const clearFilters = () => {
+    const emptyDifficulty: Difficulty[] = [];
+    const emptySeasons: Season[] = [];
     setFilters({
-      difficulty: [] as Difficulty[],
-      seasons: [] as Season[]
+      difficulty: emptyDifficulty,
+      seasons: emptySeasons
     });
   };
   
