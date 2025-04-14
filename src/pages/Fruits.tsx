@@ -63,10 +63,11 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Create a typed array for seasons
+            // Create a properly typed array
+            const newSeasons: Season[] = [...currentFilters, value];
             return {
               ...prev,
-              seasons: [...currentFilters, value]
+              seasons: newSeasons
             };
           }
         }
@@ -79,7 +80,7 @@ const Fruits = () => {
   const clearFilters = () => {
     setFilters({
       difficulty: [] as Difficulty[],
-      seasons: [] as Season[] 
+      seasons: [] as Season[]
     });
   };
   
