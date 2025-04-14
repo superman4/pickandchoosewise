@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal, X } from "lucide-react";
@@ -39,40 +38,48 @@ const Fruits = () => {
     return difficultyMatch && seasonMatch;
   });
   
-  const toggleFilter = (type: 'difficulty' | 'seasons', value: string) => {
+  const toggleDifficultyFilter = (value: Difficulty) => {
     setFilters(prev => {
-      if (type === 'difficulty') {
-        const currentFilters = [...prev.difficulty];
-        if (currentFilters.includes(value as Difficulty)) {
-          return {
-            ...prev,
-            difficulty: currentFilters.filter(v => v !== value)
-          };
-        } else {
-          return {
-            ...prev,
-            difficulty: [...currentFilters, value as Difficulty]
-          };
-        }
-      } else { // type === 'seasons'
-        // Ensure we're working with Season type
-        const seasonValue = value as Season;
-        const currentFilters = [...prev.seasons];
-        
-        if (currentFilters.includes(seasonValue)) {
-          return {
-            ...prev,
-            seasons: currentFilters.filter(v => v !== seasonValue)
-          };
-        } else {
-          // We need to ensure the array is typed correctly
-          return {
-            ...prev,
-            seasons: [...currentFilters, seasonValue] as Season[]
-          };
-        }
+      const currentFilters = [...prev.difficulty];
+      if (currentFilters.includes(value)) {
+        return {
+          ...prev,
+          difficulty: currentFilters.filter(v => v !== value)
+        };
+      } else {
+        return {
+          ...prev,
+          difficulty: [...currentFilters, value]
+        };
       }
     });
+  };
+  
+  const toggleSeasonFilter = (value: Season) => {
+    setFilters(prev => {
+      const currentFilters = [...prev.seasons];
+      if (currentFilters.includes(value)) {
+        return {
+          ...prev,
+          seasons: currentFilters.filter(v => v !== value)
+        };
+      } else {
+        return {
+          ...prev,
+          seasons: [...currentFilters, value]
+        };
+      }
+    });
+  };
+  
+  const toggleFilter = (type: 'difficulty' | 'seasons', value: string) => {
+    if (type === 'difficulty') {
+      toggleDifficultyFilter(value as Difficulty);
+    } else {
+      // For seasons, we need to ensure the value is a valid Season
+      const seasonValue = value as Season;
+      toggleSeasonFilter(seasonValue);
+    }
   };
   
   const clearFilters = () => {
