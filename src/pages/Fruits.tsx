@@ -50,14 +50,14 @@ const Fruits = () => {
           
           if (currentFilters.includes(seasonValue)) {
             // Create a new array with the filtered seasons
-            const newSeasons: Season[] = currentFilters.filter(v => v !== seasonValue);
+            const newSeasons = currentFilters.filter(v => v !== seasonValue) as Season[];
             return {
               ...prev,
               seasons: newSeasons
             };
           } else {
             // Create a new array with the added season
-            const newSeasons: Season[] = [...currentFilters, seasonValue];
+            const newSeasons = [...currentFilters, seasonValue] as Season[];
             return {
               ...prev,
               seasons: newSeasons
