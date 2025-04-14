@@ -105,6 +105,9 @@ const Fruits = () => {
     filters.difficulty.length +
     filters.seasons.length;
   
+  // Define valid seasons array with proper typing
+  const validSeasons: Season[] = ['winter', 'spring', 'summer', 'fall'];
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Back navigation */}
@@ -164,7 +167,7 @@ const Fruits = () => {
                 <div>
                   <h3 className="text-sm font-medium mb-3">Season</h3>
                   <div className="space-y-2">
-                    {(['winter', 'spring', 'summer', 'fall'] as Season[]).map(season => (
+                    {validSeasons.map(season => (
                       <div key={season} className="flex items-center space-x-2">
                         <Checkbox 
                           id={`season-${season}`} 
@@ -281,7 +284,7 @@ const Fruits = () => {
             <div>
               <h3 className="text-sm font-medium mb-3">Season</h3>
               <div className="space-y-3">
-                {(['winter', 'spring', 'summer', 'fall'] as Season[]).map(season => (
+                {validSeasons.map(season => (
                   <div key={season} className="flex items-center space-x-2">
                     <Checkbox 
                       id={`mobile-season-${season}`} 
