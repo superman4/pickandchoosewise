@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -85,11 +86,10 @@ const Vegetables = () => {
   const clearFilters = () => {
     setFilters({
       difficulty: [] as Difficulty[],
-      seasons: ([] as Season[])
+      seasons: [] as Season[]
     });
   };
   
-  // Count active filters
   const activeFiltersCount = 
     filters.difficulty.length +
     filters.seasons.length;
