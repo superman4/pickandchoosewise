@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal, X } from "lucide-react";
@@ -76,10 +77,16 @@ const Fruits = () => {
     if (type === 'difficulty') {
       toggleDifficultyFilter(value as Difficulty);
     } else {
-      // For seasons, we need to ensure the value is a valid Season
-      const seasonValue = value as Season;
-      toggleSeasonFilter(seasonValue);
+      // Ensure value is a valid Season before updating the state
+      if (isValidSeason(value)) {
+        toggleSeasonFilter(value);
+      }
     }
+  };
+  
+  // Helper function to validate if a string is a valid Season
+  const isValidSeason = (value: string): value is Season => {
+    return ['winter', 'spring', 'summer', 'fall'].includes(value);
   };
   
   const clearFilters = () => {
