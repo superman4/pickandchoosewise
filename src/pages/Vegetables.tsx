@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -60,7 +61,7 @@ const Vegetables = () => {
       } else {
         // For seasons, validate the value is a proper Season type
         if (isValidSeason(value)) {
-          const seasonValue = value;
+          const seasonValue = value; // TypeScript knows it's a Season due to the type guard
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
@@ -69,10 +70,11 @@ const Vegetables = () => {
               seasons: currentFilters.filter(v => v !== seasonValue)
             };
           } else {
-            // Since we've validated with isValidSeason, TypeScript knows seasonValue is a Season
+            // Explicitly type the new array as Season[]
+            const newSeasons: Season[] = [...currentFilters, seasonValue];
             return {
               ...prev,
-              seasons: [...currentFilters, seasonValue]
+              seasons: newSeasons
             };
           }
         }
