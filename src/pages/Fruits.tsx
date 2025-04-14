@@ -45,19 +45,22 @@ const Fruits = () => {
       } else {
         // For seasons, we need to ensure we're working with valid Season types
         if (isValidSeason(value)) {
-          const seasonValue: Season = value; // This is safe because isValidSeason is a type guard
+          const seasonValue: Season = value;
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
+            // Create a new array with the filtered seasons and assert it as Season[]
+            const newSeasons = currentFilters.filter(v => v !== seasonValue);
             return {
               ...prev,
-              seasons: currentFilters.filter(v => v !== seasonValue) as Season[]
+              seasons: newSeasons
             };
           } else {
-            // Explicitly cast the resulting array as Season[]
+            // Create a new array with the added season and assert it as Season[]
+            const newSeasons = [...currentFilters, seasonValue];
             return {
               ...prev,
-              seasons: [...currentFilters, seasonValue] as Season[]
+              seasons: newSeasons
             };
           }
         }
