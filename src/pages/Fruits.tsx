@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -12,9 +13,13 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Fruits = () => {
+  // Define empty arrays with proper types for reuse
+  const emptyDifficulties: Difficulty[] = [];
+  const emptySeasons: Season[] = [];
+  
   const [filters, setFilters] = useState<FilterState>({
-    difficulty: [] as Difficulty[],
-    seasons: [] as Season[],
+    difficulty: emptyDifficulties,
+    seasons: emptySeasons,
   });
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const fruits = getFruitsList();
@@ -77,8 +82,8 @@ const Fruits = () => {
   
   const clearFilters = () => {
     setFilters({
-      difficulty: [] as Difficulty[],
-      seasons: [] as Season[]
+      difficulty: emptyDifficulties,
+      seasons: emptySeasons
     });
   };
   
