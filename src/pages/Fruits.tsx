@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -81,8 +80,8 @@ const Fruits = () => {
   
   const clearFilters = () => {
     setFilters({
-      difficulty: [] as Difficulty[],
-      seasons: [] as Season[]
+      difficulty: emptyDifficulties,
+      seasons: emptySeasons
     });
   };
   
