@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -54,7 +53,7 @@ const Fruits = () => {
           };
         }
       } else {
-        // For seasons, ensure we're working with the correct Season type
+        // For seasons
         const seasonValue = value as Season;
         const currentFilters = [...prev.seasons];
         
@@ -64,11 +63,10 @@ const Fruits = () => {
             seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
-          // The key fix - explicitly type the array as Season[]
-          const updatedSeasons: Season[] = [...currentFilters, seasonValue];
+          // Explicitly cast the array to Season[] to satisfy TypeScript
           return {
             ...prev,
-            seasons: updatedSeasons
+            seasons: [...currentFilters, seasonValue] as Season[]
           };
         }
       }
