@@ -49,15 +49,15 @@ const Vegetables = () => {
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
-            // Create a new array with the filtered seasons and assert it as Season[]
-            const newSeasons = currentFilters.filter(v => v !== seasonValue);
+            // Create a new array with the filtered seasons
+            const newSeasons: Season[] = currentFilters.filter(v => v !== seasonValue);
             return {
               ...prev,
               seasons: newSeasons
             };
           } else {
-            // Create a new array with the added season and assert it as Season[]
-            const newSeasons = [...currentFilters, seasonValue];
+            // Create a new array with the added season
+            const newSeasons: Season[] = [...currentFilters, seasonValue];
             return {
               ...prev,
               seasons: newSeasons
