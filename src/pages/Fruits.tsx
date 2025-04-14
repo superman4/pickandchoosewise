@@ -63,10 +63,9 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== seasonValue)
             };
           } else {
-            const newSeasons: Season[] = [...currentFilters, seasonValue];
             return {
               ...prev,
-              seasons: newSeasons
+              seasons: [...currentFilters, seasonValue]
             };
           }
         }
