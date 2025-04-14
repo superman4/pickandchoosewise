@@ -7,6 +7,11 @@ import { getVegetablesList } from "@/utils/produceData";
 import { Season } from "@/utils/seasonalData";
 import ProduceFilters, { FilterState, Difficulty } from "@/components/filters/ProduceFilters";
 
+// Helper function to validate if a value is a valid Season
+const isValidSeason = (value: string): value is Season => {
+  return ['winter', 'spring', 'summer', 'fall'].includes(value);
+};
+
 const Vegetables = () => {
   const [filters, setFilters] = useState<FilterState>({
     difficulty: [] as Difficulty[],
@@ -52,21 +57,29 @@ const Vegetables = () => {
             difficulty: [...currentFilters, difficultyValue]
           };
         }
-      } else { // For seasons
-        const seasonValue = value as Season;
-        const currentFilters = [...prev.seasons];
-        
-        if (currentFilters.includes(seasonValue)) {
-          return {
-            ...prev,
-            seasons: currentFilters.filter(v => v !== seasonValue)
-          };
-        } else {
-          return {
-            ...prev,
-            seasons: [...currentFilters, seasonValue] as Season[]
-          };
+      } else {
+        // For seasons, validate the value is a proper Season type
+        if (isValidSeason(value)) {
+          const seasonValue = value as Season; // Safe to cast now
+          const currentFilters = [...prev.seasons];
+          
+          if (currentFilters.includes(seasonValue)) {
+            return {
+              ...prev,
+              seasons: currentFilters.filter(v => v !== seasonValue)
+            };
+          } else {
+            // Create a new array that's explicitly typed as Season[]
+            const newSeasons: Season[] = [...currentFilters, seasonValue];
+            return {
+              ...prev,
+              seasons: newSeasons
+            };
+          }
         }
+        
+        // If invalid season value, return unchanged state
+        return prev;
       }
     });
   };

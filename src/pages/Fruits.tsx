@@ -7,6 +7,10 @@ import { getFruitsList } from "@/utils/produceData";
 import { Season } from "@/utils/seasonalData";
 import ProduceFilters, { FilterState, Difficulty } from "@/components/filters/ProduceFilters";
 
+const isValidSeason = (value: string): value is Season => {
+  return ['winter', 'spring', 'summer', 'fall'].includes(value);
+};
+
 const Fruits = () => {
   const [filters, setFilters] = useState<FilterState>({
     difficulty: [] as Difficulty[],
@@ -15,18 +19,14 @@ const Fruits = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const fruits = getFruitsList();
   
-  // Apply filters to the fruits list
   const filteredFruits = fruits.filter(fruit => {
-    // If no filters are selected, show all fruits
     if (filters.difficulty.length === 0 && filters.seasons.length === 0) {
       return true;
     }
     
-    // Apply difficulty filter
     const difficultyMatch = filters.difficulty.length === 0 || 
       filters.difficulty.includes(fruit.difficulty as Difficulty);
     
-    // Apply season filter
     const seasonMatch = filters.seasons.length === 0 || 
       fruit.seasons.some(season => 
         filters.seasons.includes(season as Season)
@@ -53,22 +53,25 @@ const Fruits = () => {
           };
         }
       } else {
-        // For seasons
-        const seasonValue = value as Season;
-        const currentFilters = [...prev.seasons];
-        
-        if (currentFilters.includes(seasonValue)) {
-          return {
-            ...prev,
-            seasons: currentFilters.filter(v => v !== seasonValue)
-          };
-        } else {
-          // Explicitly cast the array to Season[] to satisfy TypeScript
-          return {
-            ...prev,
-            seasons: [...currentFilters, seasonValue] as Season[]
-          };
+        if (isValidSeason(value)) {
+          const seasonValue = value as Season;
+          const currentFilters = [...prev.seasons];
+          
+          if (currentFilters.includes(seasonValue)) {
+            return {
+              ...prev,
+              seasons: currentFilters.filter(v => v !== seasonValue)
+            };
+          } else {
+            const newSeasons: Season[] = [...currentFilters, seasonValue];
+            return {
+              ...prev,
+              seasons: newSeasons
+            };
+          }
         }
+        
+        return prev;
       }
     });
   };
@@ -80,14 +83,12 @@ const Fruits = () => {
     });
   };
   
-  // Count active filters
   const activeFiltersCount = 
     filters.difficulty.length +
     filters.seasons.length;
   
   return (
     <div className="min-h-screen bg-background">
-      {/* Back navigation */}
       <div className="bg-muted border-b border-border">
         <div className="container-custom py-3">
           <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
@@ -108,7 +109,6 @@ const Fruits = () => {
         </header>
         
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* ProduceFilters Component */}
           <ProduceFilters 
             filters={filters}
             toggleFilter={toggleFilter}
@@ -117,9 +117,7 @@ const Fruits = () => {
             setShowMobileFilters={setShowMobileFilters}
           />
           
-          {/* Main content */}
           <div className="flex-1">
-            {/* Mobile filter button */}
             <div className="lg:hidden flex justify-between mb-6">
               <Button 
                 variant="outline" 
@@ -136,7 +134,6 @@ const Fruits = () => {
                 )}
               </Button>
               
-              {/* Active filters indicator */}
               {activeFiltersCount > 0 && (
                 <Button variant="ghost" size="sm" onClick={clearFilters}>
                   Clear Filters
@@ -144,12 +141,10 @@ const Fruits = () => {
               )}
             </div>
             
-            {/* Results count */}
             <p className="text-sm text-muted-foreground mb-6">
               Showing {filteredFruits.length} {filteredFruits.length === 1 ? 'fruit' : 'fruits'}
             </p>
             
-            {/* Fruits grid */}
             {filteredFruits.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredFruits.map(fruit => (
