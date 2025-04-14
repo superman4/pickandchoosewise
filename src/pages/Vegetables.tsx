@@ -7,7 +7,6 @@ import { getVegetablesList } from "@/utils/produceData";
 import { Season } from "@/utils/seasonalData";
 import ProduceFilters, { FilterState, Difficulty } from "@/components/filters/ProduceFilters";
 
-// Helper function to validate if a value is a valid Season
 const isValidSeason = (value: string): value is Season => {
   return ['winter', 'spring', 'summer', 'fall'].includes(value);
 };
@@ -20,18 +19,14 @@ const Vegetables = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const vegetables = getVegetablesList();
   
-  // Apply filters to the vegetables list
   const filteredVegetables = vegetables.filter(vegetable => {
-    // If no filters are selected, show all vegetables
     if (filters.difficulty.length === 0 && filters.seasons.length === 0) {
       return true;
     }
     
-    // Apply difficulty filter
     const difficultyMatch = filters.difficulty.length === 0 || 
       filters.difficulty.includes(vegetable.difficulty as Difficulty);
     
-    // Apply season filter
     const seasonMatch = filters.seasons.length === 0 || 
       vegetable.seasons.some(season => 
         filters.seasons.includes(season as Season)
@@ -58,7 +53,6 @@ const Vegetables = () => {
           };
         }
       } else {
-        // For seasons, validate the value is a proper Season type
         if (isValidSeason(value)) {
           const currentFilters = [...prev.seasons];
           
@@ -68,7 +62,6 @@ const Vegetables = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Create a properly typed array
             const newSeasons: Season[] = [...currentFilters, value];
             return {
               ...prev,
@@ -84,8 +77,8 @@ const Vegetables = () => {
   
   const clearFilters = () => {
     setFilters({
-      difficulty: [],
-      seasons: []
+      difficulty: [] as Difficulty[],
+      seasons: [] as Season[]
     });
   };
   
@@ -95,7 +88,6 @@ const Vegetables = () => {
   
   return (
     <div className="min-h-screen bg-background">
-      {/* Back navigation */}
       <div className="bg-muted border-b border-border">
         <div className="container-custom py-3">
           <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
@@ -116,7 +108,6 @@ const Vegetables = () => {
         </header>
         
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* ProduceFilters Component */}
           <ProduceFilters 
             filters={filters}
             toggleFilter={toggleFilter}
@@ -125,9 +116,7 @@ const Vegetables = () => {
             setShowMobileFilters={setShowMobileFilters}
           />
           
-          {/* Main content */}
           <div className="flex-1">
-            {/* Mobile filter button */}
             <div className="lg:hidden flex justify-between mb-6">
               <Button 
                 variant="outline" 
@@ -144,7 +133,6 @@ const Vegetables = () => {
                 )}
               </Button>
               
-              {/* Active filters indicator */}
               {activeFiltersCount > 0 && (
                 <Button variant="ghost" size="sm" onClick={clearFilters}>
                   Clear Filters
@@ -152,12 +140,10 @@ const Vegetables = () => {
               )}
             </div>
             
-            {/* Results count */}
             <p className="text-sm text-muted-foreground mb-6">
               Showing {filteredVegetables.length} {filteredVegetables.length === 1 ? 'vegetable' : 'vegetables'}
             </p>
             
-            {/* Vegetables grid */}
             {filteredVegetables.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredVegetables.map(vegetable => (

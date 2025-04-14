@@ -77,8 +77,8 @@ const Fruits = () => {
   
   const clearFilters = () => {
     setFilters({
-      difficulty: [],
-      seasons: []
+      difficulty: [] as Difficulty[],
+      seasons: [] as Season[]
     });
   };
   
