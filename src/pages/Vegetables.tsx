@@ -61,7 +61,7 @@ const Vegetables = () => {
       } else {
         // For seasons, validate the value is a proper Season type
         if (isValidSeason(value)) {
-          const seasonValue = value as Season; // Safe to cast now
+          const seasonValue = value;
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
@@ -70,8 +70,8 @@ const Vegetables = () => {
               seasons: currentFilters.filter(v => v !== seasonValue)
             };
           } else {
-            // Explicitly create a properly typed array
-            const newSeasons: Season[] = [...currentFilters, seasonValue];
+            // Create a strongly typed new array - TypeScript now knows this array contains only valid Season values
+            const newSeasons = [...currentFilters, seasonValue];
             return {
               ...prev,
               seasons: newSeasons
