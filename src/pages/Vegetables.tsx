@@ -7,9 +7,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import ProduceCard from "@/components/common/ProduceCard";
 import { getVegetablesList } from "@/utils/produceData";
+import { Season } from "@/utils/seasonalData";
 
 type Difficulty = 'easy' | 'medium' | 'hard';
-type Season = 'winter' | 'spring' | 'summer' | 'fall';
 
 const Vegetables = () => {
   const [filters, setFilters] = useState({
@@ -63,9 +63,10 @@ const Vegetables = () => {
             seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
+          // Explicitly cast the array to Season[] to satisfy TypeScript
           return {
             ...prev,
-            seasons: [...currentFilters, seasonValue]
+            seasons: [...currentFilters, seasonValue] as Season[]
           };
         }
       }
