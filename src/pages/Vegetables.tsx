@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -13,6 +14,7 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Vegetables = () => {
+  // Explicitly type these empty arrays to fix the TypeScript error
   const emptyDifficulties: Difficulty[] = [];
   const emptySeasons: Season[] = [];
   
