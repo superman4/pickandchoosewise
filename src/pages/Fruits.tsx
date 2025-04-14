@@ -54,21 +54,21 @@ const Fruits = () => {
           };
         }
       } else {
+        // For seasons, validate the value is a valid Season
         if (isValidSeason(value)) {
-          const seasonValue = value as Season; // Now TypeScript knows it's a Season
+          // Now TypeScript knows value is a Season due to the type guard
           const currentFilters = [...prev.seasons];
           
-          if (currentFilters.includes(seasonValue)) {
+          if (currentFilters.includes(value)) {
             return {
               ...prev,
-              seasons: currentFilters.filter(v => v !== seasonValue)
+              seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Create a type-safe array of seasons
-            const newSeasons: Season[] = [...currentFilters, seasonValue];
+            // Since we've validated that value is a Season, we can safely add it
             return {
               ...prev,
-              seasons: newSeasons
+              seasons: [...currentFilters, value]
             };
           }
         }
