@@ -53,27 +53,22 @@ const Fruits = () => {
           };
         }
       } else {
-        // Define valid seasons
-        const validSeasons = ['winter', 'spring', 'summer', 'fall'] as const;
+        // Define valid seasons with explicit typing
         const seasonValue = value as Season;
+        const currentFilters = [...prev.seasons];
         
-        // Check if value is a valid Season before proceeding
-        if ((validSeasons as readonly string[]).includes(value)) {
-          const currentFilters = [...prev.seasons];
-          
-          if (currentFilters.includes(seasonValue)) {
-            return {
-              ...prev,
-              seasons: currentFilters.filter(v => v !== seasonValue)
-            };
-          } else {
-            return {
-              ...prev,
-              seasons: [...currentFilters, seasonValue]
-            };
-          }
+        // No need for additional validation as the type assertion handles it
+        if (currentFilters.includes(seasonValue)) {
+          return {
+            ...prev,
+            seasons: currentFilters.filter(v => v !== seasonValue)
+          };
+        } else {
+          return {
+            ...prev,
+            seasons: [...currentFilters, seasonValue]
+          };
         }
-        return prev;
       }
     });
   };
