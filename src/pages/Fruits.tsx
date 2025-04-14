@@ -65,10 +65,13 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Since we've validated that value is a Season, we can safely add it
+            // Create a new typed array to ensure type safety
+            const newSeasons: Season[] = [...currentFilters];
+            newSeasons.push(value); // Add the validated season
+            
             return {
               ...prev,
-              seasons: [...currentFilters, value]
+              seasons: newSeasons
             };
           }
         }

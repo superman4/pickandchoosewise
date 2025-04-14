@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -69,10 +70,13 @@ const Vegetables = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Since we've validated with isValidSeason, we can safely use value as Season
+            // Create a new typed array to ensure type safety
+            const newSeasons: Season[] = [...currentFilters]; 
+            newSeasons.push(value); // Add the validated season
+            
             return {
               ...prev,
-              seasons: [...currentFilters, value]
+              seasons: newSeasons
             };
           }
         }
