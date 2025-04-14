@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -23,22 +22,6 @@ const Fruits = () => {
   });
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const fruits = getFruitsList();
-  
-  const filteredFruits = fruits.filter(fruit => {
-    if (filters.difficulty.length === 0 && filters.seasons.length === 0) {
-      return true;
-    }
-    
-    const difficultyMatch = filters.difficulty.length === 0 || 
-      filters.difficulty.includes(fruit.difficulty as Difficulty);
-    
-    const seasonMatch = filters.seasons.length === 0 || 
-      fruit.seasons.some(season => 
-        filters.seasons.includes(season as Season)
-      );
-    
-    return difficultyMatch && seasonMatch;
-  });
   
   const toggleFilter = (type: 'difficulty' | 'seasons', value: string) => {
     setFilters(prev => {
@@ -82,10 +65,26 @@ const Fruits = () => {
   
   const clearFilters = () => {
     setFilters({
-      difficulty: [] as Difficulty[],
-      seasons: [] as Season[]
+      difficulty: emptyDifficulties,
+      seasons: emptySeasons
     });
   };
+  
+  const filteredFruits = fruits.filter(fruit => {
+    if (filters.difficulty.length === 0 && filters.seasons.length === 0) {
+      return true;
+    }
+    
+    const difficultyMatch = filters.difficulty.length === 0 || 
+      filters.difficulty.includes(fruit.difficulty as Difficulty);
+    
+    const seasonMatch = filters.seasons.length === 0 || 
+      fruit.seasons.some(season => 
+        filters.seasons.includes(season as Season)
+      );
+    
+    return difficultyMatch && seasonMatch;
+  });
   
   const activeFiltersCount = 
     filters.difficulty.length +
