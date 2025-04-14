@@ -1,10 +1,7 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, SlidersHorizontal, X } from "lucide-react";
+import { ChevronLeft, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import ProduceCard from "@/components/common/ProduceCard";
 import { getFruitsList } from "@/utils/produceData";
 import { Season } from "@/utils/seasonalData";
@@ -56,12 +53,12 @@ const Fruits = () => {
           };
         }
       } else {
-        // For seasons - explicitly define the seasons as const of type Season
-        const validSeasons: readonly Season[] = ['winter', 'spring', 'summer', 'fall'] as const;
+        // Define valid seasons
+        const validSeasons = ['winter', 'spring', 'summer', 'fall'] as const;
+        const seasonValue = value as Season;
         
-        // Check if value is a valid Season
-        if (validSeasons.includes(value as Season)) {
-          const seasonValue = value as Season;
+        // Check if value is a valid Season before proceeding
+        if ((validSeasons as readonly string[]).includes(value)) {
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
