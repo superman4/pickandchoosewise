@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -12,6 +13,7 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Vegetables = () => {
+  // Explicitly typed empty arrays
   const emptyDifficulties: Difficulty[] = [];
   const emptySeasons: Season[] = [];
   
