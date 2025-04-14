@@ -13,6 +13,7 @@ import {
   TabsTrigger
 } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
+import RipenessSlider from "@/components/produce/RipenessSlider";
 
 const ProduceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -221,6 +222,7 @@ const ProduceDetail = () => {
               </TabsContent>
               
               <TabsContent value="ripening" className="space-y-4">
+                <RipenessSlider produce={produce} />
                 <Card>
                   <CardContent className="pt-6">
                     <h3 className="text-lg font-semibold mb-4">Ripening Tips</h3>
