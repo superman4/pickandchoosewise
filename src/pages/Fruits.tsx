@@ -41,7 +41,7 @@ const Fruits = () => {
   
   const toggleFilter = (type: 'difficulty' | 'seasons', value: string) => {
     setFilters(prev => {
-      const currentFilters = [...prev[type]] as (Difficulty | Season)[];
+      const currentFilters = [...prev[type]];
       if (currentFilters.includes(value as any)) {
         return {
           ...prev,
