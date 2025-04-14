@@ -11,6 +11,7 @@ import Fruits from "./pages/Fruits";
 import Vegetables from "./pages/Vegetables";
 import ProduceDetail from "./pages/ProduceDetail";
 import About from "./pages/About";
+import Seasonal from "./pages/Seasonal";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/vegetables" element={<Vegetables />} />
           <Route path="/produce/:slug" element={<ProduceDetail />} />
           <Route path="/about" element={<About />} />
+          <Route path="/seasonal" element={<Seasonal />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

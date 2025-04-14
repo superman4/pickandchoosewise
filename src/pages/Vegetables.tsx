@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal, X } from "lucide-react";
@@ -63,10 +62,9 @@ const Vegetables = () => {
             seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
-          // Explicitly cast the array to Season[] to satisfy TypeScript
           return {
             ...prev,
-            seasons: [...currentFilters, seasonValue] as Season[]
+            seasons: [...currentFilters, seasonValue]
           };
         }
       }
@@ -148,11 +146,11 @@ const Vegetables = () => {
                 <div>
                   <h3 className="text-sm font-medium mb-3">Season</h3>
                   <div className="space-y-2">
-                    {['winter', 'spring', 'summer', 'fall'].map(season => (
+                    {(['winter', 'spring', 'summer', 'fall'] as Season[]).map(season => (
                       <div key={season} className="flex items-center space-x-2">
                         <Checkbox 
                           id={`season-${season}`} 
-                          checked={filters.seasons.includes(season as Season)}
+                          checked={filters.seasons.includes(season)}
                           onCheckedChange={() => toggleFilter('seasons', season)}
                         />
                         <Label htmlFor={`season-${season}`} className="text-sm">
@@ -265,11 +263,11 @@ const Vegetables = () => {
             <div>
               <h3 className="text-sm font-medium mb-3">Season</h3>
               <div className="space-y-3">
-                {['winter', 'spring', 'summer', 'fall'].map(season => (
+                {(['winter', 'spring', 'summer', 'fall'] as Season[]).map(season => (
                   <div key={season} className="flex items-center space-x-2">
                     <Checkbox 
                       id={`mobile-season-${season}`} 
-                      checked={filters.seasons.includes(season as Season)}
+                      checked={filters.seasons.includes(season)}
                       onCheckedChange={() => toggleFilter('seasons', season)}
                     />
                     <Label htmlFor={`mobile-season-${season}`}>
