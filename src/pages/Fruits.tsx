@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -14,7 +13,6 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Fruits = () => {
-  // Explicitly typed empty arrays for proper type safety
   const emptyDifficulties: Difficulty[] = [];
   const emptySeasons: Season[] = [];
   
@@ -68,7 +66,6 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Use the explicit typing to ensure it's a Season[]
             const newSeasons: Season[] = [...currentFilters, value];
             return {
               ...prev,
@@ -83,7 +80,6 @@ const Fruits = () => {
   };
   
   const clearFilters = () => {
-    // Use the same explicitly typed empty arrays to ensure type safety
     setFilters({
       difficulty: emptyDifficulties,
       seasons: emptySeasons
