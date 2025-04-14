@@ -41,17 +41,32 @@ const Vegetables = () => {
   
   const toggleFilter = (type: 'difficulty' | 'seasons', value: string) => {
     setFilters(prev => {
-      const currentFilters = [...prev[type]];
-      if (currentFilters.includes(value as any)) {
-        return {
-          ...prev,
-          [type]: currentFilters.filter(v => v !== value)
-        };
-      } else {
-        return {
-          ...prev,
-          [type]: [...currentFilters, value as any]
-        };
+      if (type === 'difficulty') {
+        const currentFilters = [...prev.difficulty];
+        if (currentFilters.includes(value as Difficulty)) {
+          return {
+            ...prev,
+            difficulty: currentFilters.filter(v => v !== value)
+          };
+        } else {
+          return {
+            ...prev,
+            difficulty: [...currentFilters, value as Difficulty]
+          };
+        }
+      } else { // type === 'seasons'
+        const currentFilters = [...prev.seasons];
+        if (currentFilters.includes(value as Season)) {
+          return {
+            ...prev,
+            seasons: currentFilters.filter(v => v !== value)
+          };
+        } else {
+          return {
+            ...prev,
+            seasons: [...currentFilters, value as Season]
+          };
+        }
       }
     });
   };
