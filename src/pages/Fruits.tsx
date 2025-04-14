@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -54,7 +53,6 @@ const Fruits = () => {
           };
         }
       } else {
-        // For seasons, validate the value is a valid Season
         if (isValidSeason(value)) {
           const currentFilters = [...prev.seasons];
           
@@ -64,7 +62,6 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Create a properly typed array
             const newSeasons: Season[] = [...currentFilters, value];
             return {
               ...prev,
@@ -79,11 +76,9 @@ const Fruits = () => {
   };
   
   const clearFilters = () => {
-    const emptyDifficulty: Difficulty[] = [];
-    const emptySeasons: Season[] = [];
     setFilters({
-      difficulty: emptyDifficulty,
-      seasons: emptySeasons
+      difficulty: [],
+      seasons: []
     });
   };
   
