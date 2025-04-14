@@ -12,6 +12,10 @@ import Vegetables from "./pages/Vegetables";
 import ProduceDetail from "./pages/ProduceDetail";
 import About from "./pages/About";
 import Seasonal from "./pages/Seasonal";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Guides from "./pages/Guides";
+import Pantry from "./pages/Pantry";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +38,11 @@ const App = () => (
           <Route path="/produce/:slug" element={<ProduceDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/seasonal" element={<Seasonal />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/guides/:slug" element={<BlogPost />} />
+          <Route path="/pantry" element={<Pantry />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
