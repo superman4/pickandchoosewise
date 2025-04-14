@@ -141,6 +141,175 @@ export const produceDetails: ProduceDetail[] = [
       'Contains vitamins K, E, C, and B6'
     ],
     relatedItems: ['limes', 'tomatoes', 'onions', 'cilantro']
+  },
+  {
+    id: '2',
+    name: 'Strawberries',
+    slug: 'strawberries',
+    category: 'fruit',
+    seasons: ['spring', 'summer'],
+    difficulty: 'easy',
+    images: {
+      main: 'https://images.unsplash.com/photo-1624153064068-98dc33c9b092?q=80&w=600&auto=format',
+      ripe: 'https://images.unsplash.com/photo-1543528176-61b239494933?q=80&w=600&auto=format',
+      underripe: 'https://images.unsplash.com/photo-1613461920867-9ea115fee900?q=80&w=600&auto=format',
+      overripe: 'https://images.unsplash.com/photo-1591300589776-8dae021f5708?q=80&w=600&auto=format',
+    },
+    selectionCriteria: {
+      visual: [
+        'Bright red color throughout with no white shoulders',
+        'Fresh-looking green caps still attached',
+        'No visible mold or soft spots'
+      ],
+      touch: [
+        'Firm but slightly yielding to touch',
+        'Dry to the touch (not damp or leaky)',
+        'No indentations or squished areas'
+      ],
+      smell: [
+        'Strong, sweet fragrance',
+        'Avoid strawberries with no smell (underripe) or fermented smell (overripe)'
+      ],
+      sound: []
+    },
+    commonIssues: [
+      'White shoulders indicate underripeness',
+      'Mushy texture often means overripe or stored too long',
+      'Mold can spread quickly through the package'
+    ],
+    ripeningTips: {
+      speedUp: [
+        'Strawberries don\'t ripen after being picked',
+        'Best consumed within 1-2 days of purchase'
+      ],
+      slowDown: [
+        'Refrigerate immediately after purchase',
+        'Don\'t wash until ready to eat'
+      ]
+    },
+    storage: [
+      'Store in refrigerator in original container or on paper towel',
+      'Don\'t wash until ready to eat',
+      'Will keep 2-3 days if properly stored'
+    ],
+    nutrition: [
+      'Excellent source of vitamin C',
+      'Good source of fiber',
+      'Contains antioxidants and folate'
+    ],
+    relatedItems: ['raspberries', 'blueberries', 'blackberries']
+  },
+  {
+    id: '3',
+    name: 'Broccoli',
+    slug: 'broccoli',
+    category: 'vegetable',
+    seasons: ['fall', 'winter', 'spring'],
+    difficulty: 'medium',
+    images: {
+      main: 'https://images.unsplash.com/photo-1614336215203-fee841f875fd?q=80&w=600&auto=format',
+      ripe: 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=600&auto=format',
+      underripe: 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=600&auto=format',
+      overripe: 'https://images.unsplash.com/photo-1651033706892-ef60a92102a0?q=80&w=600&auto=format',
+    },
+    selectionCriteria: {
+      visual: [
+        'Dark green, compact floret clusters',
+        'No yellowing on florets',
+        'Fresh-looking, firm stalks'
+      ],
+      touch: [
+        'Firm head with tightly packed florets',
+        'Sturdy, not bendable stems',
+        'Crisp texture throughout'
+      ],
+      smell: [
+        'Mild, fresh vegetable aroma',
+        'Avoid broccoli with strong or sulfurous smell'
+      ],
+      sound: []
+    },
+    commonIssues: [
+      'Yellow florets indicate age and loss of nutrients',
+      'Woody stems are tough and unpleasant to eat',
+      'Strong smell indicates broccoli is past its prime'
+    ],
+    ripeningTips: {
+      speedUp: ['Broccoli should be used when fresh and doesn\'t benefit from ripening'],
+      slowDown: [
+        'Store in refrigerator',
+        'Keep unwashed until ready to use'
+      ]
+    },
+    storage: [
+      'Refrigerate in a loosely wrapped plastic bag',
+      'Don\'t wash until ready to use',
+      'Will keep 3-5 days if properly stored'
+    ],
+    nutrition: [
+      'Excellent source of vitamin C and K',
+      'Good source of fiber',
+      'Contains antioxidants and folate'
+    ],
+    relatedItems: ['cauliflower', 'kale', 'brussels sprouts']
+  },
+  {
+    id: '4',
+    name: 'Tomatoes',
+    slug: 'tomatoes',
+    category: 'vegetable',
+    seasons: ['summer', 'fall'],
+    difficulty: 'medium',
+    images: {
+      main: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?q=80&w=600&auto=format',
+      ripe: 'https://images.unsplash.com/photo-1582284540020-8acbe03f4924?q=80&w=600&auto=format',
+      underripe: 'https://images.unsplash.com/photo-1591164962271-255a13215afe?q=80&w=600&auto=format',
+      overripe: 'https://images.unsplash.com/photo-1563032426-8d7500da493f?q=80&w=600&auto=format',
+    },
+    selectionCriteria: {
+      visual: [
+        'Rich, uniform color (varies by variety)',
+        'Shiny, taut skin',
+        'No cracks, bruises or soft spots'
+      ],
+      touch: [
+        'Firm with slight give when gently squeezed',
+        'Heavy for its size',
+        'Smooth skin, not wrinkled'
+      ],
+      smell: [
+        'Sweet, earthy aroma at the stem end',
+        'Stronger fragrance indicates better flavor'
+      ],
+      sound: []
+    },
+    commonIssues: [
+      'Hard, pale interior often indicates refrigeration or picking too early',
+      'Wrinkled skin indicates age or dehydration',
+      'Dark spots or mold indicate spoilage'
+    ],
+    ripeningTips: {
+      speedUp: [
+        'Store at room temperature',
+        'Place in paper bag with a banana',
+        'Stem side down on countertop'
+      ],
+      slowDown: [
+        'Store in coolest part of kitchen (not refrigerator)',
+        'Keep away from direct sunlight'
+      ]
+    },
+    storage: [
+      'Store at room temperature, never refrigerate uncut tomatoes',
+      'Place stem-side down on countertop to preserve flavor',
+      'Cut tomatoes can be refrigerated for 1-2 days'
+    ],
+    nutrition: [
+      'Good source of vitamins A and C',
+      'Contains lycopene, a powerful antioxidant',
+      'Provides potassium and vitamin K'
+    ],
+    relatedItems: ['peppers', 'onions', 'basil', 'garlic']
   }
 ];
 

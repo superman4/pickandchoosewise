@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -6,6 +7,7 @@ import ProduceCard from "@/components/common/ProduceCard";
 import { getVegetablesList } from "@/utils/produceData";
 import { Season } from "@/utils/seasonalData";
 import ProduceFilters, { FilterState, Difficulty } from "@/components/filters/ProduceFilters";
+import { Helmet } from "react-helmet";
 
 const isValidSeason = (value: string): value is Season => {
   return ['winter', 'spring', 'summer', 'fall'].includes(value);
@@ -94,6 +96,11 @@ const Vegetables = () => {
   
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Vegetables Guide | PickPerfect.org</title>
+        <meta name="description" content="Learn how to select the freshest, crispest vegetables every time with our comprehensive selection guide." />
+      </Helmet>
+      
       <div className="bg-muted border-b border-border">
         <div className="container-custom py-3">
           <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
