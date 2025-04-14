@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -53,20 +54,21 @@ const Fruits = () => {
           };
         }
       } else {
-        // Define valid seasons with explicit typing
+        // For seasons, ensure we're working with the correct Season type
         const seasonValue = value as Season;
         const currentFilters = [...prev.seasons];
         
-        // No need for additional validation as the type assertion handles it
         if (currentFilters.includes(seasonValue)) {
           return {
             ...prev,
             seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
+          // The key fix - explicitly type the array as Season[]
+          const updatedSeasons: Season[] = [...currentFilters, seasonValue];
           return {
             ...prev,
-            seasons: [...currentFilters, seasonValue]
+            seasons: updatedSeasons
           };
         }
       }
