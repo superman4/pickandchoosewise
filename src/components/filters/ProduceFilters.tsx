@@ -39,7 +39,7 @@ export const ProduceFilters: React.FC<ProduceFiltersProps> = ({
     filters.seasons.length;
   
   // Define valid seasons array with proper typing
-  const validSeasons: Season[] = ['winter', 'spring', 'summer', 'fall'];
+  const validSeasons: readonly Season[] = ['winter', 'spring', 'summer', 'fall'] as const;
   
   return (
     <>

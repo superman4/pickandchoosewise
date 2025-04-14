@@ -56,8 +56,9 @@ const Vegetables = () => {
           };
         }
       } else {
-        // For seasons
-        const validSeasons: Season[] = ['winter', 'spring', 'summer', 'fall'];
+        // For seasons - explicitly define the seasons as const of type Season
+        const validSeasons: readonly Season[] = ['winter', 'spring', 'summer', 'fall'] as const;
+        
         // Check if value is a valid Season
         if (validSeasons.includes(value as Season)) {
           const seasonValue = value as Season;
