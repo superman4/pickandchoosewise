@@ -64,9 +64,9 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
-            // Create a new array with explicit Season type
-            const newSeasons = [...currentFilters];
-            // Now add the validated season (TypeScript knows it's a Season because of our type guard)
+            // Create a properly typed array for type safety
+            const newSeasons: Season[] = [...currentFilters];
+            // Add the validated season
             newSeasons.push(value);
             
             return {
