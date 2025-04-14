@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -48,16 +49,20 @@ const Fruits = () => {
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
-            // Filter out the season using the type guard
+            // Filter out the season
+            const filteredSeasons: Season[] = currentFilters.filter(
+              (v): v is Season => v !== seasonValue
+            );
             return {
               ...prev,
-              seasons: currentFilters.filter(v => v !== seasonValue)
+              seasons: filteredSeasons
             };
           } else {
             // Add the season ensuring it's properly typed
+            const newSeasons: Season[] = [...currentFilters, seasonValue];
             return {
               ...prev,
-              seasons: [...currentFilters, seasonValue]
+              seasons: newSeasons
             };
           }
         }
