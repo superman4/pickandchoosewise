@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -63,9 +64,11 @@ const Fruits = () => {
               seasons: currentFilters.filter(v => v !== value)
             };
           } else {
+            // Create a typed array for seasons
+            const newSeasons: Season[] = [...currentFilters, value];
             return {
               ...prev,
-              seasons: [...currentFilters, value]
+              seasons: newSeasons
             };
           }
         }
