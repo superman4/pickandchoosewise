@@ -55,6 +55,7 @@ const Vegetables = () => {
           };
         }
       } else { // type === 'seasons'
+        // Ensure we're working with Season type
         const seasonValue = value as Season;
         const currentFilters = [...prev.seasons];
         
@@ -64,11 +65,10 @@ const Vegetables = () => {
             seasons: currentFilters.filter(v => v !== seasonValue)
           };
         } else {
-          // Explicitly cast the resulting array to Season[]
-          const newSeasons: Season[] = [...currentFilters, seasonValue];
+          // We need to ensure the array is typed correctly
           return {
             ...prev,
-            seasons: newSeasons
+            seasons: [...currentFilters, seasonValue] as Season[]
           };
         }
       }
