@@ -57,8 +57,9 @@ const Vegetables = () => {
         }
       } else {
         // For seasons
-        // Make sure value is a valid Season before updating
-        if (['winter', 'spring', 'summer', 'fall'].includes(value)) {
+        const validSeasons: Season[] = ['winter', 'spring', 'summer', 'fall'];
+        // Check if value is a valid Season
+        if (validSeasons.includes(value as Season)) {
           const seasonValue = value as Season;
           const currentFilters = [...prev.seasons];
           
