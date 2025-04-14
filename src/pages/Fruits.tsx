@@ -13,7 +13,7 @@ const isValidSeason = (value: string): value is Season => {
 };
 
 const Fruits = () => {
-  // Explicitly typed empty arrays
+  // Explicitly typed empty arrays for proper type safety
   const emptyDifficulties: Difficulty[] = [];
   const emptySeasons: Season[] = [];
   
