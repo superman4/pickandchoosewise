@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
+
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Fruits from "./pages/Fruits";
@@ -18,6 +19,7 @@ import Pantry from "./pages/Pantry";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Login from "@/pages/admin/Login";
 import Dashboard from "@/pages/admin/Dashboard";
+import Produce from "@/pages/admin/Produce";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,7 @@ const App = () => (
           <Route path="/pantry" element={<Pantry />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="produce" element={<Produce />} />
           </Route>
           <Route path="/admin/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />

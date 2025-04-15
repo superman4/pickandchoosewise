@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -113,22 +112,83 @@ const AdminLayout = () => {
       {/* Desktop sidebar */}
       <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 border-r">
         <ScrollArea className="flex-1">
-          <Sidebar />
+          <div className="flex flex-col h-full">
+            <div className="px-3 py-2">
+              <h2 className="mb-2 px-4 text-lg font-semibold">
+                Admin Dashboard
+              </h2>
+              <div className="space-y-1">
+                {navigation.map((item) => {
+                  const isActive = location.pathname === item.href;
+                  return (
+                    <Button
+                      key={item.name}
+                      variant={isActive ? 'secondary' : 'ghost'}
+                      className="w-full justify-start"
+                      asChild
+                    >
+                      <Link to={item.href}>
+                        <item.icon className="mr-2 h-4 w-4" />
+                        {item.name}
+                      </Link>
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="mt-auto p-4">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-muted-foreground"
+                onClick={handleLogout}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Log out
+              </Button>
+            </div>
+          </div>
         </ScrollArea>
       </div>
 
       {/* Mobile sidebar */}
       <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-        <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            className="lg:hidden fixed left-4 top-4 z-40"
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
-        </SheetTrigger>
         <SheetContent side="left" className="w-64 p-0">
-          <Sidebar />
+          <div className="flex flex-col h-full">
+            <div className="px-3 py-2">
+              <h2 className="mb-2 px-4 text-lg font-semibold">
+                Admin Dashboard
+              </h2>
+              <div className="space-y-1">
+                {navigation.map((item) => {
+                  const isActive = location.pathname === item.href;
+                  return (
+                    <Button
+                      key={item.name}
+                      variant={isActive ? 'secondary' : 'ghost'}
+                      className="w-full justify-start"
+                      onClick={() => setIsSidebarOpen(false)}
+                      asChild
+                    >
+                      <Link to={item.href}>
+                        <item.icon className="mr-2 h-4 w-4" />
+                        {item.name}
+                      </Link>
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="mt-auto p-4">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-muted-foreground"
+                onClick={handleLogout}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Log out
+              </Button>
+            </div>
+          </div>
         </SheetContent>
       </Sheet>
 
