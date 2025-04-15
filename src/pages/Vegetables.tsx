@@ -49,13 +49,12 @@ const Vegetables = () => {
           if (currentFilters.includes(seasonValue)) {
             return {
               ...prev,
-              seasons: currentFilters.filter(v => v !== seasonValue)
+              seasons: currentFilters.filter(v => v !== seasonValue) as Season[]
             };
           } else {
-            const newFilters = currentFilters.concat([seasonValue]);
             return {
               ...prev,
-              seasons: newFilters
+              seasons: [...currentFilters, seasonValue] as Season[]
             };
           }
         }
