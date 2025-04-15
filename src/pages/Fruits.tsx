@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, SlidersHorizontal } from "lucide-react";
@@ -43,25 +42,20 @@ const Fruits = () => {
           };
         }
       } else {
-        // For seasons, we need to ensure we're working with valid Season types
         if (isValidSeason(value)) {
           const seasonValue = value as Season;
           const currentFilters = [...prev.seasons];
           
           if (currentFilters.includes(seasonValue)) {
-            // Create a new array with the season filtered out
-            // Cast the result back to Season[] to maintain type safety
-            const newSeasons = currentFilters.filter(v => v !== seasonValue) as Season[];
             return {
               ...prev,
-              seasons: newSeasons
+              seasons: currentFilters.filter(v => v !== seasonValue)
             };
           } else {
-            // Add the season ensuring it's properly typed
-            const newSeasons: Season[] = [...currentFilters, seasonValue];
+            const newFilters = currentFilters.concat([seasonValue]);
             return {
               ...prev,
-              seasons: newSeasons
+              seasons: newFilters
             };
           }
         }
