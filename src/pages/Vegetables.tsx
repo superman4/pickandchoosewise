@@ -54,7 +54,7 @@ const Vegetables = () => {
         } else {
           return {
             ...prev,
-            seasons: [...currentFilters, seasonValue] as Season[]
+            seasons: [...currentFilters, seasonValue]
           };
         }
       }
@@ -159,7 +159,7 @@ const Vegetables = () => {
                     id: vegetable.id,
                     name: vegetable.name,
                     category: vegetable.category,
-                    seasons: vegetable.seasons,
+                    seasons: vegetable.seasons as Season[],
                     image: vegetable.images.main,
                     difficulty: vegetable.difficulty,
                     slug: vegetable.slug

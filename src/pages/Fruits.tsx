@@ -54,7 +54,7 @@ const Fruits = () => {
         } else {
           return {
             ...prev,
-            seasons: [...currentFilters, seasonValue] as Season[]
+            seasons: [...currentFilters, seasonValue]
           };
         }
       }
@@ -159,7 +159,7 @@ const Fruits = () => {
                     id: fruit.id,
                     name: fruit.name,
                     category: fruit.category,
-                    seasons: fruit.seasons,
+                    seasons: fruit.seasons as Season[],
                     image: fruit.images.main,
                     difficulty: fruit.difficulty,
                     slug: fruit.slug
