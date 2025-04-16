@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, Info } from "lucide-react";
+import { ChevronLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import { Card, CardContent } from "@/components/ui/card";
@@ -442,16 +442,31 @@ const NaturalRemedies = () => {
   const [selectedItem, setSelectedItem] = useState<RemedyItem | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("compounds");
-  
+
+  const itemsByCategory = remedyItems.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = [];
+    }
+    acc[item.category].push(item);
+    return acc;
+  }, {} as Record<string, RemedyItem[]>);
+
+  const previewItems = selectedCategory === "All" 
+    ? Object.entries(itemsByCategory).map(([category, items]) => ({
+        category,
+        items: items.slice(0, 3)
+      }))
+    : [];
+
   const filteredItems = selectedCategory === "All" 
-    ? remedyItems 
+    ? [] // We'll handle "All" view differently
     : remedyItems.filter(item => item.category === selectedCategory);
 
   const handleItemClick = (item: RemedyItem) => {
     setSelectedItem(item);
     setIsDialogOpen(true);
   };
-  
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -491,44 +506,100 @@ const NaturalRemedies = () => {
           ))}
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map(item => (
-            <Card 
-              key={item.id} 
-              className="overflow-hidden h-full cursor-pointer transition-shadow hover:shadow-md"
-              onClick={() => handleItemClick(item)}
-            >
-              <div className="aspect-video overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.name} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardContent className="pt-6">
-                <div className="mb-1">
-                  <span className="text-xs text-muted-foreground">{item.category}</span>
+        {selectedCategory === "All" ? (
+          <div className="space-y-12">
+            {previewItems.map(({ category, items }) => (
+              <section key={category}>
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-semibold">{category}</h2>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => setSelectedCategory(category)}
+                    className="group"
+                  >
+                    View all 
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
                 </div>
-                <div className="flex justify-between items-start">
-                  <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
-                </div>
-                <p className="text-muted-foreground mb-4">{item.description}</p>
-                
-                <h4 className="font-medium mb-2">Therapeutic Applications</h4>
-                <ul className="list-disc pl-5 space-y-1">
-                  {item.therapeuticApplications.slice(0, 3).map((application, index) => (
-                    <li key={index} className="text-sm text-muted-foreground">{application}</li>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {items.map(item => (
+                    <Card 
+                      key={item.id}
+                      className="overflow-hidden h-full cursor-pointer transition-shadow hover:shadow-md"
+                      onClick={() => handleItemClick(item)}
+                    >
+                      <div className="aspect-video overflow-hidden">
+                        <img 
+                          src={item.image} 
+                          alt={item.name} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <CardContent className="pt-6">
+                        <div className="mb-1">
+                          <span className="text-xs text-muted-foreground">{item.category}</span>
+                        </div>
+                        <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+                        <p className="text-muted-foreground mb-4">{item.description}</p>
+                        
+                        <h4 className="font-medium mb-2">Therapeutic Applications</h4>
+                        <ul className="list-disc pl-5 space-y-1">
+                          {item.therapeuticApplications.slice(0, 3).map((application, index) => (
+                            <li key={index} className="text-sm text-muted-foreground">{application}</li>
+                          ))}
+                          {item.therapeuticApplications.length > 3 && (
+                            <li className="text-sm text-muted-foreground">
+                              + {item.therapeuticApplications.length - 3} more
+                            </li>
+                          )}
+                        </ul>
+                      </CardContent>
+                    </Card>
                   ))}
-                  {item.therapeuticApplications.length > 3 && (
-                    <li className="text-sm text-muted-foreground">
-                      + {item.therapeuticApplications.length - 3} more
-                    </li>
-                  )}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                </div>
+              </section>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredItems.map(item => (
+              <Card 
+                key={item.id} 
+                className="overflow-hidden h-full cursor-pointer transition-shadow hover:shadow-md"
+                onClick={() => handleItemClick(item)}
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardContent className="pt-6">
+                  <div className="mb-1">
+                    <span className="text-xs text-muted-foreground">{item.category}</span>
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">{item.description}</p>
+                  
+                  <h4 className="font-medium mb-2">Therapeutic Applications</h4>
+                  <ul className="list-disc pl-5 space-y-1">
+                    {item.therapeuticApplications.slice(0, 3).map((application, index) => (
+                      <li key={index} className="text-sm text-muted-foreground">{application}</li>
+                    ))}
+                    {item.therapeuticApplications.length > 3 && (
+                      <li className="text-sm text-muted-foreground">
+                        + {item.therapeuticApplications.length - 3} more
+                      </li>
+                    )}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
         
         {filteredItems.length === 0 && (
           <div className="text-center py-16">
