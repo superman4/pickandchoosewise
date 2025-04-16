@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, Info } from "lucide-react";
@@ -21,57 +20,99 @@ interface RemedyItem {
 
 const remedyItems: RemedyItem[] = [
   {
-    id: "1",
+    id: "honey",
     name: "Honey",
     category: "Natural Sweeteners",
-    description: "A natural sweetener with antimicrobial properties and distinct therapeutic benefits.",
+    description: "A natural sweetener with antimicrobial properties and distinct therapeutic benefits",
     image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=600&auto=format",
     activeCompounds: [
       "Hydrogen peroxide",
       "Methylglyoxal (particularly in Manuka honey)",
       "Defensin-1 protein",
       "Flavonoids and phenolic acids",
-      "Enzymes including glucose oxidase"
+      "Enzymes including glucose oxidase",
+      "Oligosaccharides",
+      "Royalisin peptides"
     ],
     therapeuticApplications: [
       "Wound healing support for burns and ulcers",
       "Antimicrobial properties against various bacteria",
       "Cough suppression, especially in children",
       "Gastrointestinal support",
-      "Antioxidant activity"
+      "Antioxidant activity",
+      "Allergic response modulation",
+      "Prebiotic support for gut health"
     ],
     safetyConsiderations: [
       "Not recommended for infants under 12 months due to risk of botulism",
       "Diabetes patients should account for honey's carbohydrate content",
       "Medical-grade honey should be used for wound treatment",
-      "Different honey varieties have varying medicinal properties"
+      "Different honey varieties have varying medicinal properties",
+      "Quality varies with darker varieties typically offering higher medicinal value",
+      "Store at room temperature; crystallization is natural"
     ]
   },
   {
-    id: "2",
-    name: "Turmeric",
-    category: "Spices",
-    description: "A golden-colored spice with potent anti-inflammatory and antioxidant properties.",
-    image: "https://images.unsplash.com/photo-1615485500704-8e990f9921d9?q=80&w=600&auto=format",
+    id: "maple-syrup",
+    name: "Maple Syrup",
+    category: "Natural Sweeteners",
+    description: "A mineral-rich sweetener with unique antioxidant compounds",
+    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=600&auto=format",
     activeCompounds: [
-      "Curcumin (primary active component)",
-      "Demethoxycurcumin",
-      "Bisdemethoxycurcumin",
-      "Volatile oils (turmerone, atlantone)",
-      "Polysaccharides"
+      "Quebecol (unique polyphenolic compound)",
+      "Phenolic compounds including gallic acid",
+      "Lignans with antioxidant effects",
+      "Organic acids (succinic, fumaric, malic)",
+      "Abscisic acid",
+      "Essential minerals",
+      "TMHPP with antiproliferative activity"
     ],
     therapeuticApplications: [
-      "Anti-inflammatory benefits for arthritis and inflammatory conditions",
       "Antioxidant protection against free radicals",
-      "Brain function support and potential neurodegenerative benefits",
-      "Cardiovascular support and improved endothelial function",
-      "Potential cancer prevention properties"
+      "Anti-inflammatory activity",
+      "Antimicrobial effects against pathogens",
+      "Metabolic regulation through insulin sensitivity",
+      "Hepatoprotective properties",
+      "Prebiotic potential",
+      "Immune system support"
     ],
     safetyConsiderations: [
-      "Low bioavailability when consumed alone, best with black pepper or fats",
-      "May interact with blood thinners and certain medications",
-      "Typical dosage ranges from 500-2000mg of standardized extract daily",
-      "Available in capsules, powders, tinctures, and as a cooking spice"
+      "Darker grades contain higher concentrations of beneficial compounds",
+      "Monitor blood sugar despite lower glycemic index",
+      "Check for pure maple syrup certification",
+      "Refrigerate after opening for best preservation",
+      "Consider lead content from production equipment",
+      "Use within recommended serving sizes"
+    ]
+  },
+  {
+    id: "stevia",
+    name: "Stevia",
+    category: "Natural Sweeteners",
+    description: "A zero-calorie sweetener with potential metabolic benefits",
+    image: "https://images.unsplash.com/photo-1628961886791-ea163da4e2d7?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Steviol glycosides (stevioside, rebaudioside A-F)",
+      "Flavonoids (apigenin, kaempferol, quercetin)",
+      "Phenolic compounds",
+      "Chlorophylls in less processed forms",
+      "Essential oils in whole leaf preparations"
+    ],
+    therapeuticApplications: [
+      "Blood glucose regulation without insulin impact",
+      "Blood pressure modulation",
+      "Dental protection against bacteria",
+      "Anti-inflammatory effects",
+      "Potential anticancer properties",
+      "Weight management support"
+    ],
+    safetyConsiderations: [
+      "FDA GRAS status for purified steviol glycosides only",
+      "ADI established at 4 mg/kg body weight",
+      "Possible allergic reactions in Asteraceae family sensitivity",
+      "Heat stable up to 392°F (200°C)",
+      "Taste varies by product concentration",
+      "Monitor for possible medication interactions"
     ]
   },
   {
@@ -184,7 +225,7 @@ const remedyItems: RemedyItem[] = [
   }
 ];
 
-const categories = ["All", "Natural Sweeteners", "Spices", "Roots", "Bulbs", "Succulents", "Herbs"];
+const categoriesList = ["All", "Natural Sweeteners", "Spices", "Roots", "Bulbs", "Succulents", "Herbs"];
 
 const NaturalRemedies = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -228,7 +269,7 @@ const NaturalRemedies = () => {
         </header>
         
         <div className="flex flex-wrap gap-2 mb-8">
-          {categories.map(category => (
+          {categoriesList.map(category => (
             <Button
               key={category}
               variant={selectedCategory === category ? "default" : "outline"}
