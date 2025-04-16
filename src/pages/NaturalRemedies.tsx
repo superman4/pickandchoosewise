@@ -493,7 +493,11 @@ const NaturalRemedies = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map(item => (
-            <Card key={item.id} className="overflow-hidden h-full">
+            <Card 
+              key={item.id} 
+              className="overflow-hidden h-full cursor-pointer transition-shadow hover:shadow-md"
+              onClick={() => handleItemClick(item)}
+            >
               <div className="aspect-video overflow-hidden">
                 <img 
                   src={item.image} 
@@ -507,14 +511,6 @@ const NaturalRemedies = () => {
                 </div>
                 <div className="flex justify-between items-start">
                   <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={() => handleItemClick(item)}
-                    aria-label={`More info about ${item.name}`}
-                  >
-                    <Info className="h-4 w-4" />
-                  </Button>
                 </div>
                 <p className="text-muted-foreground mb-4">{item.description}</p>
                 
@@ -525,13 +521,7 @@ const NaturalRemedies = () => {
                   ))}
                   {item.therapeuticApplications.length > 3 && (
                     <li className="text-sm text-muted-foreground">
-                      <Button 
-                        variant="link" 
-                        className="p-0 h-auto text-sm"
-                        onClick={() => handleItemClick(item)}
-                      >
-                        + {item.therapeuticApplications.length - 3} more
-                      </Button>
+                      + {item.therapeuticApplications.length - 3} more
                     </li>
                   )}
                 </ul>
