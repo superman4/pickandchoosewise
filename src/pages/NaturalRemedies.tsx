@@ -116,6 +116,216 @@ const remedyItems: RemedyItem[] = [
     ]
   },
   {
+    id: "coconut-sugar",
+    name: "Coconut Sugar",
+    category: "Natural Sweeteners",
+    description: "A minimally processed sweetener derived from coconut palm sap with trace nutrients",
+    image: "https://images.unsplash.com/photo-1617331119689-1d4004bf16bd?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Inulin (prebiotic fiber)",
+      "Polyphenols",
+      "Potassium",
+      "Magnesium",
+      "Iron",
+      "B vitamins",
+      "Antioxidants"
+    ],
+    therapeuticApplications: [
+      "Supports prebiotic gut health",
+      "Lower glycemic index compared to refined sugar",
+      "Provides trace minerals",
+      "Supports electrolyte balance",
+      "Modest antioxidant protection",
+      "Potential insulin sensitivity improvement"
+    ],
+    safetyConsiderations: [
+      "Similar caloric content to regular sugar",
+      "Not suitable for strict diabetic diets",
+      "Contains inulin which may cause digestive discomfort",
+      "Sustainable sourcing is important",
+      "Should be consumed in moderation"
+    ]
+  },
+  {
+    id: "date-sugar",
+    name: "Date Sugar",
+    category: "Natural Sweeteners",
+    description: "A whole food sweetener made from ground dried dates with high nutrient density",
+    image: "https://images.unsplash.com/photo-1589985018141-5a76e5449227?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Fructooligosaccharides (FOS)",
+      "Phenolic compounds",
+      "Carotenoids",
+      "Potassium",
+      "Magnesium",
+      "Iron",
+      "Fiber"
+    ],
+    therapeuticApplications: [
+      "High antioxidant capacity",
+      "Supports digestive health",
+      "Provides essential minerals",
+      "Potential blood sugar regulation",
+      "Supports bone mineralization",
+      "May improve iron absorption"
+    ],
+    safetyConsiderations: [
+      "High in natural sugars",
+      "Sticky texture may impact dental health",
+      "Potential for allergic reactions",
+      "Should be used in moderation",
+      "Not suitable for strict low-carb diets"
+    ]
+  },
+  {
+    id: "monk-fruit",
+    name: "Monk Fruit Sweetener",
+    category: "Natural Sweeteners",
+    description: "A zero-calorie natural sweetener extracted from monk fruit with powerful antioxidant properties",
+    image: "https://images.unsplash.com/photo-1629981445328-f0194d5c4a3b?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Mogrosides",
+      "Triterpene glycosides",
+      "Flavonoids",
+      "Polysaccharides"
+    ],
+    therapeuticApplications: [
+      "Zero glycemic impact",
+      "Potent antioxidant protection",
+      "Anti-inflammatory effects",
+      "Supports blood glucose management",
+      "Potential anticancer properties",
+      "Suitable for diabetic dietary plans"
+    ],
+    safetyConsiderations: [
+      "Generally recognized as safe (GRAS)",
+      "May have slight aftertaste",
+      "Often blended with other sweeteners",
+      "Heat stable up to 300°F",
+      "Limited long-term studies available"
+    ]
+  },
+  {
+    id: "blackstrap-molasses",
+    name: "Blackstrap Molasses",
+    category: "Natural Sweeteners",
+    description: "A nutrient-rich byproduct of sugar production with high mineral content",
+    image: "https://images.unsplash.com/photo-1547716006-3ec7f854cfb7?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Iron",
+      "Calcium",
+      "Magnesium",
+      "Potassium",
+      "B vitamins",
+      "Antioxidants",
+      "Phenolic compounds"
+    ],
+    therapeuticApplications: [
+      "Supports iron deficiency management",
+      "Provides essential minerals",
+      "May support bone health",
+      "Potential laxative effect",
+      "Antioxidant protection",
+      "Supports nervous system function"
+    ],
+    safetyConsiderations: [
+      "Contains significant sugar content",
+      "Potential lead contamination concerns",
+      "May cause digestive sensitivity",
+      "Not suitable for diabetic diets",
+      "Strong, distinct flavor"
+    ]
+  },
+  {
+    id: "yacon-syrup",
+    name: "Yacon Syrup",
+    category: "Natural Sweeteners",
+    description: "A low-calorie syrup with powerful prebiotic properties from Andean yacon root",
+    image: "https://images.unsplash.com/photo-1622189041777-8cdfb9e7c750?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Fructooligosaccharides (FOS)",
+      "Inulin",
+      "Polyphenols",
+      "Potassium",
+      "Calcium",
+      "Trace minerals"
+    ],
+    therapeuticApplications: [
+      "Supports gut microbiome health",
+      "Low glycemic index",
+      "Potential weight management support",
+      "Improves mineral absorption",
+      "May regulate blood sugar",
+      "Supports digestive regularity"
+    ],
+    safetyConsiderations: [
+      "May cause initial digestive discomfort",
+      "Contains some free sugars",
+      "Requires refrigeration after opening",
+      "Start with small quantities",
+      "Not suitable for all digestive conditions"
+    ]
+  },
+  {
+    id: "lucuma",
+    name: "Lucuma Powder",
+    category: "Natural Sweeteners",
+    description: "A nutrient-dense Peruvian fruit powder with low glycemic impact",
+    image: "https://images.unsplash.com/photo-1625938451824-d30210eabab4?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Beta-carotene",
+      "Niacin (B3)",
+      "Complex carbohydrates",
+      "Flavonoids",
+      "Minerals",
+      "Dietary fiber"
+    ],
+    therapeuticApplications: [
+      "Antioxidant protection",
+      "Supports skin health",
+      "Gradual energy release",
+      "Supports digestive health",
+      "Anti-inflammatory potential",
+      "Low glycemic index"
+    ],
+    safetyConsiderations: [
+      "Hypoallergenic for most people",
+      "Best used in cold or warm preparations",
+      "May require recipe adjustments",
+      "Unique sweet potato-like flavor",
+      "Consume with healthy fats for better absorption"
+    ]
+  },
+  {
+    id: "erythritol",
+    name: "Erythritol",
+    category: "Natural Sweeteners",
+    description: "A zero-calorie sugar alcohol with excellent digestive tolerance",
+    image: "https://images.unsplash.com/photo-1602103088096-ff64aede2cd0?q=80&w=600&auto=format",
+    activeCompounds: [
+      "Sugar alcohol",
+      "Zero glycemic impact",
+      "Trace minerals",
+      "Antioxidant compounds"
+    ],
+    therapeuticApplications: [
+      "Dental health protection",
+      "Zero calorie sweetening",
+      "Diabetic-friendly",
+      "Supports weight management",
+      "Potential antioxidant effects",
+      "High digestive tolerance"
+    ],
+    safetyConsiderations: [
+      "Cooling sensation in mouth",
+      "Does not caramelize in baking",
+      "Generally well-tolerated",
+      "Often combined with other sweeteners",
+      "FDA Generally Recognized as Safe (GRAS)",
+      "Produced through fermentation"
+    ]
+  },
+  {
     id: "3",
     name: "Ginger",
     category: "Roots",
