@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +17,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Guides from "./pages/Guides";
 import Pantry from "./pages/Pantry";
+import NaturalRemedies from "./pages/NaturalRemedies";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Login from "@/pages/admin/Login";
 import Dashboard from "@/pages/admin/Dashboard";
@@ -47,6 +49,7 @@ const App = () => (
           <Route path="/guides" element={<Guides />} />
           <Route path="/guides/:slug" element={<BlogPost />} />
           <Route path="/pantry" element={<Pantry />} />
+          <Route path="/natural-remedies" element={<NaturalRemedies />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="produce" element={<Produce />} />

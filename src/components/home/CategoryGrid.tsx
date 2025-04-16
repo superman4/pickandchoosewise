@@ -1,11 +1,11 @@
 
 import { Link } from "react-router-dom";
-import { Apple, Carrot, Utensils, LucideIcon } from "lucide-react";
+import { Apple, Carrot, Utensils, Flower } from "lucide-react";
 
 interface CategoryItem {
   name: string;
   path: string;
-  icon: LucideIcon;
+  icon: typeof Apple;
   color: string;
   bgColor: string;
   description: string;
@@ -35,6 +35,14 @@ const categories: CategoryItem[] = [
     color: "text-carrot-600",
     bgColor: "bg-carrot-100",
     description: "Select quality grains, oils, and dry goods"
+  },
+  {
+    name: "Natural Remedies",
+    path: "/natural-remedies",
+    icon: Flower,
+    color: "text-leaf-600",
+    bgColor: "bg-leaf-100/60",
+    description: "Discover therapeutic herbs and natural treatments"
   }
 ];
 
@@ -47,7 +55,7 @@ const CategoryGrid = () => {
           Explore our comprehensive guides organized by food type to find exactly what you need
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
             <Link 
               key={category.name} 

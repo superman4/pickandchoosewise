@@ -64,6 +64,11 @@ const Navbar = () => {
               Pantry Items
             </Link>
             <Link 
+              to="/natural-remedies" 
+              className="font-medium text-foreground hover:text-leaf-700 transition-colors">
+              Natural Remedies
+            </Link>
+            <Link 
               to="/guides" 
               className="font-medium text-foreground hover:text-leaf-700 transition-colors">
               Guides
@@ -105,6 +110,12 @@ const Navbar = () => {
                 className="px-4 py-2 rounded-md hover:bg-muted transition-colors font-medium"
                 onClick={() => setIsOpen(false)}>
                 Pantry Items
+              </Link>
+              <Link 
+                to="/natural-remedies" 
+                className="px-4 py-2 rounded-md hover:bg-muted transition-colors font-medium"
+                onClick={() => setIsOpen(false)}>
+                Natural Remedies
               </Link>
               <Link 
                 to="/guides" 
